@@ -58,29 +58,6 @@ header {
     display: block;
 }
 
-/* Přepínání loga podle světlého/tmavého režimu */
-.menu-logo {
-    position: relative;
-    display: inline-block;
-}
-
-.logo-svetle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    pointer-events: none;
-}
-
-@media (prefers-color-scheme: dark) {
-    .logo-tmave {
-        opacity: 0;
-    }
-    .logo-svetle {
-        opacity: 1;
-    }
-}
-
 nav a {
     position: relative;
     color: #2e2a26;
