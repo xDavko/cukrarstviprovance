@@ -18,7 +18,7 @@ html {
 
 body {
     font-family: 'Raleway', sans-serif;
-    font-weight: 300;
+    font-weight: 300;[
     margin: 0;
     color: #4a4540;
     line-height: 1.8;
@@ -130,19 +130,22 @@ h2::after {
     text-align: center;
     scroll-margin-top: 0;
     background-image: linear-gradient(rgba(253, 251, 248, 0.72), rgba(253, 251, 248, 0.72)), url('images/pozadi.jpg');
-    background-size: 115%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     animation: dychani 18s ease-in-out infinite alternate;
+}
 }
 
 /* Pomalé oživení úvodní fotky (Ken Burns efekt) */
 @keyframes dychani {
     from {
-        background-position: 38% 50%;
-        background-size: 115%;
+        background-size: cover;
+        background-position: 40% 50%;
     }
     to {
-        background-position: 62% 50%;
-        background-size: 128%;
+        background-size: cover;
+        background-position: 60% 50%;
     }
 }
 
