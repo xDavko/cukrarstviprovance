@@ -525,4 +525,16 @@ footer p {
         opacity: 1;
         transform: none;
     }
+
+   /* Samsung Internet – vypnout násilný tmavý režim */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    html {
+        filter: none !important;
+    }
+}
+
+/* Zabránit automatickému ztmavení na mobilu */
+:root {
+    color-scheme: light only;
+    forced-color-adjust: none;
 }
