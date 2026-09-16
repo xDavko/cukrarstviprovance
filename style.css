@@ -447,6 +447,14 @@ footer p {
     color: #6b645c;
 }
 
+/* Zabránit modrému záblesku (označení) při klikání v lightboxu */
+#lightbox,
+#lightbox * {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* ---------- MOBIL ---------- */
 @media (max-width: 700px) {
     /* Logo nahoře uprostřed, pod ním všechny 4 odkazy v jedné řadě */
