@@ -448,7 +448,11 @@ footer p {
 /* ---------- MOBIL ---------- */
 @media (max-width: 700px) {
     .menu {
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .menu-strana {
         gap: 18px;
     }
 
