@@ -538,3 +538,17 @@ footer p {
     color-scheme: light only;
     forced-color-adjust: none;
 }
+
+/* Přepínání loga podle světlého/tmavého režimu */
+.logo-svetle {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .logo-tmave {
+        display: none;
+    }
+    .logo-svetle {
+        display: block;
+    }
+}
