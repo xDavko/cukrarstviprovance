@@ -449,21 +449,29 @@ footer p {
 
 /* ---------- MOBIL ---------- */
 @media (max-width: 700px) {
+    /* Logo nahoře uprostřed, pod ním všechny 4 odkazy v jedné řadě */
     .menu {
-        flex-direction: column;
-        gap: 15px;
+        flex-wrap: wrap;
+        gap: 12px 22px;
     }
 
-    .menu-strana {
-        gap: 20px;
+    .menu-logo {
+        order: -1;
+        flex-basis: 100%;
+        display: flex;
+        justify-content: center;
     }
 
     .menu-logo img {
-        height: 55px;
+        height: 60px;
+    }
+
+    .menu-strana {
+        gap: 22px;
     }
 
     nav a {
-        font-size: 11px;
+        font-size: 12px;
         letter-spacing: 2px;
     }
 
