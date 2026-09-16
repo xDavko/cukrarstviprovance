@@ -59,16 +59,25 @@ header {
 }
 
 /* Přepínání loga podle světlého/tmavého režimu */
+.menu-logo {
+    position: relative;
+    display: inline-block;
+}
+
 .logo-svetle {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
 }
 
 @media (prefers-color-scheme: dark) {
     .logo-tmave {
-        display: none;
+        opacity: 0;
     }
     .logo-svetle {
-        display: block;
+        opacity: 1;
     }
 }
 
