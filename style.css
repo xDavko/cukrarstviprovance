@@ -447,12 +447,20 @@ footer p {
     color: #6b645c;
 }
 
-/* Zabránit modrému záblesku (označení) při klikání v lightboxu */
+/* Zabránit označení a záblesku v lightboxu */
 #lightbox,
 #lightbox * {
     user-select: none;
     -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     -webkit-tap-highlight-color: transparent;
+}
+
+#lightbox-predchozi,
+#lightbox-dalsi,
+#lightbox-zavrit {
+    outline: none;
 }
 
 /* ---------- MOBIL ---------- */
