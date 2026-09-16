@@ -12,6 +12,26 @@
    jemná linka:   #e8e2da
 */
 
+/* Zrušit modrý záblesk / zvýraznění při klikání na tlačítka a odkazy */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+.filtr,
+#vic-fotek,
+#mene-fotek,
+#lightbox-predchozi,
+#lightbox-dalsi,
+#lightbox-zavrit,
+.galerie-mrizka img {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -339,6 +359,8 @@ footer p {
     align-items: center;
     z-index: 1000;
     cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 #lightbox img {
@@ -445,22 +467,6 @@ footer p {
 .bezlepek p:last-child {
     font-size: 15px;
     color: #6b645c;
-}
-
-/* Zabránit označení a záblesku v lightboxu */
-#lightbox,
-#lightbox * {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
-#lightbox-predchozi,
-#lightbox-dalsi,
-#lightbox-zavrit {
-    outline: none;
 }
 
 /* ---------- MOBIL ---------- */
