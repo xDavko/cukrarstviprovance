@@ -32,10 +32,9 @@
             </div>
 
             <a href="#uvod" class="menu-logo">
-                <img src="images/logo.png" alt="Cukrářství Provance" class="logo-tmave">
-                <img src="images/logo-svetle.png" alt="Cukrářství Provance" class="logo-svetle">
+                <img src="images/logo.png" alt="Cukrářství Provance">
             </a>
-            
+
             <div class="menu-strana">
                 <a href="#galerie">Galerie</a>
                 <a href="#kontakt">Kontakt</a>
@@ -80,7 +79,7 @@
         </div>
 
         <div class="galerie-mrizka">
-            
+
             <!-- Zákusky -->
             <img src="images/zakusky/zakusky1.jpg" loading="lazy" alt="Zákusek s levandulí">
             <img src="images/zakusky/zakusky2.jpg" loading="lazy" alt="Karamelový zákusek">
@@ -94,7 +93,6 @@
             <img src="images/zakusky/zakusky10.jpg" loading="lazy" alt="Tiramisu">
             <img src="images/zakusky/zakusky11.jpg" loading="lazy" alt="Levandulový zákusek">
             <img src="images/zakusky/zakusky12.jpg" loading="lazy" alt="Mrkvový">
-
 
             <!-- Dorty -->
             <img src="images/dorty/dorty1.jpg" loading="lazy" alt="Svatební dort s modrými růžemi">
@@ -118,12 +116,9 @@
             <img src="images/dorty/dorty19.jpg" loading="lazy" alt="Sachr dort">
             <img src="images/dorty/dorty20.jpg" loading="lazy" alt="Vánoční dort">
 
-
-            <!--Ostatní-->
+            <!-- Ostatní -->
             <img src="images/ostatni/ostatni1.jpg" loading="lazy" alt="Vánočka">
 
-            <!-- Velikonoce -->
-            <!--img src="images/velikonoce/velikonoce1.jpg" loading="lazy" alt="Velikonoční mazanec"-->
         </div>
 
         <div class="galerie-vic">
@@ -179,7 +174,6 @@
     function prekresli() {
         fotky.forEach(function(fotka, i) {
             if (i < zobrazeno) {
-                // zpoždění podle pořadí ve várce – fotky se vynoří jedna po druhé
                 fotka.style.animationDelay = ((i % KROK) * 0.08) + 's';
                 fotka.classList.add('viditelna');
             } else {
@@ -197,7 +191,6 @@
     });
 
     tlacitkoMene.addEventListener('click', function() {
-        // nejdřív vyjeď nahoru, teprve pak schovej (jinak stránka "propadne")
         document.getElementById('galerie').scrollIntoView({ behavior: 'smooth' });
         setTimeout(function() {
             zobrazeno = KROK;
@@ -216,7 +209,6 @@
 
     let aktualniIndex = 0;
 
-    // seznam jen aktuálně zobrazených fotek (těch s .viditelna)
     function viditelneFotky() {
         return Array.from(fotky).filter(function(f) {
             return f.classList.contains('viditelna');
@@ -238,14 +230,12 @@
         lightboxFoto.alt = seznam[aktualniIndex].alt;
     }
 
-    // klik na fotku ji otevře
     fotky.forEach(function(fotka) {
         fotka.addEventListener('click', function() {
             otevriLightbox(fotka);
         });
     });
 
-    // šipky
     lightboxDalsi.addEventListener('click', function(e) {
         e.stopPropagation();
         prepni(1);
@@ -256,19 +246,16 @@
         prepni(-1);
     });
 
-    // zavření křížkem
     lightboxZavrit.addEventListener('click', function() {
         lightbox.style.display = 'none';
     });
 
-    // klik do prázdna zavře (ale ne na fotku nebo šipky)
     lightbox.addEventListener('click', function(e) {
         if (e.target === lightbox) {
             lightbox.style.display = 'none';
         }
     });
 
-    // ovládání klávesnicí
     document.addEventListener('keydown', function(e) {
         if (lightbox.style.display === 'flex') {
             if (e.key === 'Escape') lightbox.style.display = 'none';
@@ -303,7 +290,7 @@
     }, { threshold: 0.1 });
 
     pozorovatelGalerie.observe(galerieMrizka);
-    
+
     /* ---------- "Úvod" vždy vyjede úplně nahoru ---------- */
     document.querySelectorAll('a[href="#uvod"]').forEach(function(odkaz) {
         odkaz.addEventListener('click', function(e) {
@@ -311,8 +298,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
-
-
 </script>
 
 </body>
