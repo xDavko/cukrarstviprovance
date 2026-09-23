@@ -225,8 +225,7 @@
             mini.alt = fotka.alt;
             mini.loading = 'lazy';
             mini.addEventListener('click', function() {
-                album.style.display = 'none';        // zavři album
-                otevriLightboxIndex(i);              // otevři fotku ve velkém
+                otevriLightboxIndex(i);              // otevři fotku ve velkém (album zůstává pod ním)
             });
             albumMrizka.appendChild(mini);
         });
@@ -257,6 +256,7 @@
 
     let aktualniIndex = 0;
     let seznamProchazeni = [];
+    let lightboxZAlba = false;   // byl lightbox otevřen z alba?
 
     // fotky viditelné v hlavní galerii (těch s .viditelna)
     function viditelneFotky() {
@@ -267,6 +267,7 @@
 
     // otevření z hlavní galerie – prochází jen viditelné
     function otevriLightbox(fotka) {
+        lightboxZAlba = false;
         seznamProchazeni = viditelneFotky();
         aktualniIndex = seznamProchazeni.indexOf(fotka);
         zobrazLightbox();
@@ -274,9 +275,16 @@
 
     // otevření z alba – prochází VŠECHNY fotky
     function otevriLightboxIndex(i) {
+        lightboxZAlba = true;
         seznamProchazeni = Array.from(fotky);
         aktualniIndex = i;
         zobrazLightbox();
+    }
+
+    // zavření lightboxu – když byl otevřen z alba, vrať se do alba (album zůstane)
+    function zavriLightbox() {
+        lightbox.style.display = 'none';
+        // album zůstává otevřené pod lightboxem, takže se návštěvník vrátí do mřížky
     }
 
     function zobrazLightbox() {
@@ -308,18 +316,18 @@
     });
 
     lightboxZavrit.addEventListener('click', function() {
-        lightbox.style.display = 'none';
+        zavriLightbox();
     });
 
     lightbox.addEventListener('click', function(e) {
         if (e.target === lightbox) {
-            lightbox.style.display = 'none';
+            zavriLightbox();
         }
     });
 
     document.addEventListener('keydown', function(e) {
         if (lightbox.style.display === 'flex') {
-            if (e.key === 'Escape') lightbox.style.display = 'none';
+            if (e.key === 'Escape') zavriLightbox();
             if (e.key === 'ArrowRight') prepni(1);
             if (e.key === 'ArrowLeft') prepni(-1);
         } else if (album.style.display === 'block') {
