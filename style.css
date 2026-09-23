@@ -249,7 +249,7 @@ h2::after {
 #vse-fotek,
 #mene-fotek {
     background: none;
-    border: 1px solid #a898b8;
+    border: 1px solid #d6c6ae;
     color: #4a4540;
     padding: 12px 35px;
     margin: 0 6px 10px 6px;
@@ -264,7 +264,7 @@ h2::after {
 #vic-fotek:hover,
 #vse-fotek:hover,
 #mene-fotek:hover {
-    background-color: #a898b8;
+    background-color: #d6c6ae;
     color: #ffffff;
 }
 
