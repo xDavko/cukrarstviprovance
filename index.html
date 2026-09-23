@@ -125,6 +125,7 @@
 
         <div class="galerie-vic">
             <button id="vic-fotek">Zobrazit další</button>
+            <button id="vse-fotek">Zobrazit celou galerii</button>
             <button id="mene-fotek">Zobrazit méně</button>
         </div>
     </section>
@@ -157,6 +158,12 @@
         <p>© 2026 Cukrářství Provance</p>
     </footer>
 
+<!-- ALBUM – mřížka všech fotek v tmavém překryvu -->
+    <div id="album">
+        <span id="album-zavrit">&times;</span>
+        <div id="album-mrizka"></div>
+    </div>
+
 <!-- Lightbox – zvětšená fotka -->
     <div id="lightbox">
         <span id="lightbox-zavrit">&times;</span>
@@ -169,6 +176,7 @@
     /* ---------- GALERIE: postupné načítání s kaskádou ---------- */
     const fotky = document.querySelectorAll('.galerie-mrizka img');
     const tlacitkoVic = document.getElementById('vic-fotek');
+    const tlacitkoVse = document.getElementById('vse-fotek');
     const tlacitkoMene = document.getElementById('mene-fotek');
     const KROK = 9;
     let zobrazeno = KROK;
@@ -184,6 +192,7 @@
         });
 
         tlacitkoVic.style.display = (zobrazeno >= fotky.length) ? 'none' : 'inline-block';
+        tlacitkoVse.style.display = 'inline-block';
         tlacitkoMene.style.display = (zobrazeno > KROK) ? 'inline-block' : 'none';
     }
 
@@ -202,6 +211,43 @@
 
     prekresli();
 
+    /* ---------- ALBUM (mřížka všech fotek v tmavém překryvu) ---------- */
+    const album = document.getElementById('album');
+    const albumMrizka = document.getElementById('album-mrizka');
+    const albumZavrit = document.getElementById('album-zavrit');
+    let albumNaplneno = false;
+
+    function naplnAlbum() {
+        // miniatury do alba vytvoříme jen jednou
+        fotky.forEach(function(fotka, i) {
+            const mini = document.createElement('img');
+            mini.src = fotka.src;
+            mini.alt = fotka.alt;
+            mini.loading = 'lazy';
+            mini.addEventListener('click', function() {
+                album.style.display = 'none';        // zavři album
+                otevriLightboxIndex(i);              // otevři fotku ve velkém
+            });
+            albumMrizka.appendChild(mini);
+        });
+        albumNaplneno = true;
+    }
+
+    tlacitkoVse.addEventListener('click', function() {
+        if (!albumNaplneno) naplnAlbum();
+        album.style.display = 'block';
+    });
+
+    albumZavrit.addEventListener('click', function() {
+        album.style.display = 'none';
+    });
+
+    album.addEventListener('click', function(e) {
+        if (e.target === album) {
+            album.style.display = 'none';
+        }
+    });
+
     /* ---------- LIGHTBOX s procházením ---------- */
     const lightbox = document.getElementById('lightbox');
     const lightboxFoto = document.getElementById('lightbox-foto');
@@ -210,26 +256,39 @@
     const lightboxDalsi = document.getElementById('lightbox-dalsi');
 
     let aktualniIndex = 0;
+    let seznamProchazeni = [];
 
+    // fotky viditelné v hlavní galerii (těch s .viditelna)
     function viditelneFotky() {
         return Array.from(fotky).filter(function(f) {
             return f.classList.contains('viditelna');
         });
     }
 
+    // otevření z hlavní galerie – prochází jen viditelné
     function otevriLightbox(fotka) {
-        const seznam = viditelneFotky();
-        aktualniIndex = seznam.indexOf(fotka);
+        seznamProchazeni = viditelneFotky();
+        aktualniIndex = seznamProchazeni.indexOf(fotka);
+        zobrazLightbox();
+    }
+
+    // otevření z alba – prochází VŠECHNY fotky
+    function otevriLightboxIndex(i) {
+        seznamProchazeni = Array.from(fotky);
+        aktualniIndex = i;
+        zobrazLightbox();
+    }
+
+    function zobrazLightbox() {
         lightbox.style.display = 'flex';
-        lightboxFoto.src = fotka.src;
-        lightboxFoto.alt = fotka.alt;
+        lightboxFoto.src = seznamProchazeni[aktualniIndex].src;
+        lightboxFoto.alt = seznamProchazeni[aktualniIndex].alt;
     }
 
     function prepni(smer) {
-        const seznam = viditelneFotky();
-        aktualniIndex = (aktualniIndex + smer + seznam.length) % seznam.length;
-        lightboxFoto.src = seznam[aktualniIndex].src;
-        lightboxFoto.alt = seznam[aktualniIndex].alt;
+        aktualniIndex = (aktualniIndex + smer + seznamProchazeni.length) % seznamProchazeni.length;
+        lightboxFoto.src = seznamProchazeni[aktualniIndex].src;
+        lightboxFoto.alt = seznamProchazeni[aktualniIndex].alt;
     }
 
     fotky.forEach(function(fotka) {
@@ -263,6 +322,8 @@
             if (e.key === 'Escape') lightbox.style.display = 'none';
             if (e.key === 'ArrowRight') prepni(1);
             if (e.key === 'ArrowLeft') prepni(-1);
+        } else if (album.style.display === 'block') {
+            if (e.key === 'Escape') album.style.display = 'none';
         }
     });
 
@@ -298,10 +359,12 @@
         odkaz.addEventListener('click', function(e) {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            history.pushState(null, null, '#uvod'); /* Tento řádek adresu správně přepíše */
+            history.pushState(null, null, '#uvod');
         });
     });
 </script>
-    <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3abac62b09d64580888b1f772442a804"}'></script><!-- End Cloudflare Web Analytics -->
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3abac62b09d64580888b1f772442a804"}'></script><!-- End Cloudflare Web Analytics -->
+
 </body>
 </html>
