@@ -151,22 +151,9 @@ h2::after {
     text-align: center;
     scroll-margin-top: 0;
     background-image: linear-gradient(rgba(253, 251, 248, 0.72), rgba(253, 251, 248, 0.72)), url('images/pozadi.jpg');
-    background-size: 108%;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    animation: dychani 30s ease-in-out infinite alternate;
-}
-
-/* Pomalé oživení úvodní fotky (Ken Burns efekt) */
-@keyframes dychani {
-    from {
-        background-size: 108%;
-        background-position: 42% 50%;
-    }
-    to {
-        background-size: 116%;
-        background-position: 58% 50%;
-    }
 }
 
 /* Text v úvodu – posunutý výš k poli pomocí odsazení odspodu */
@@ -596,12 +583,6 @@ footer p {
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
-    }
-
-    #uvod {
-        animation: none;
-        background-size: cover;
-        background-position: center;
     }
 
     .objevit,
